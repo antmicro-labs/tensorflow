@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.13.1)
-include($ENV{ZEPHYR_BASE}/cmake/app/boilerplate.cmake NO_POLICY_SCOPE)
-project(tf_lite_miccro_speech)
+find_package(Zephyr)
+project(tf_lite_micro_speech)
 
 set(TF_MICRO_DIR ${PROJECT_SOURCE_DIR}/../../../)
 file(GLOB MICRO_SOURCES ${TF_MICRO_DIR}/*cc)
@@ -23,8 +23,10 @@ target_compile_options(app PRIVATE "-fno-threadsafe-statics")
 
 target_sources(app PRIVATE
                 src/assert.cc
-		src/command_responder.cc
-		src/command_responder.h
+		#src/command_responder.cc
+		#src/command_responder.h
+                ../command_responder.cc
+		../command_responder.h
 		../audio_provider.cc
 		../audio_provider.h
 		../feature_provider.cc
