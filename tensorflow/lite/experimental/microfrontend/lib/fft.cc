@@ -17,8 +17,8 @@ limitations under the License.
 #include <string.h>
 
 #define FIXED_POINT 16
-#include "kiss_fft.h"
-#include "tools/kiss_fftr.h"
+#include "tensorflow/lite/micro/tools/make/downloads/kissfft/kiss_fft.h"
+#include "tensorflow/lite/micro/tools/make/downloads/kissfft/tools/kiss_fftr.h"
 
 void FftCompute(struct FftState* state, const int16_t* input,
                 int input_scale_shift) {

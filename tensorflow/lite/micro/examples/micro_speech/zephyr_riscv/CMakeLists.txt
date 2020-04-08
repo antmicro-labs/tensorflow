@@ -23,8 +23,6 @@ target_compile_options(app PRIVATE "-fno-threadsafe-statics")
 
 target_sources(app PRIVATE
                 src/assert.cc
-		#src/command_responder.cc
-		#src/command_responder.h
                 ../command_responder.cc
 		../command_responder.h
 		../audio_provider.cc
@@ -36,16 +34,74 @@ target_sources(app PRIVATE
 		../main_functions.h
 		../recognize_commands.cc
 		../recognize_commands.h
+		../no_1000ms_sample_data.cc
+		../no_1000ms_sample_data.h
+		../yes_1000ms_sample_data.cc
+		../yes_1000ms_sample_data.h
+		../no_30ms_sample_data.cc
+		../no_30ms_sample_data.h
+		../yes_30ms_sample_data.cc
+		../yes_30ms_sample_data.h
 		../micro_features/tiny_conv_micro_features_model_data.cc
 		../micro_features/tiny_conv_micro_features_model_data.h
-
-                #../output_handler.cc
-                #../output_handler.h
-                #../gesture_predictor.cc
-                #../constants.h
-                #../gesture_predictor.h
-                #../magic_wand_model_data.cc
-		#../magic_wand_model_data.h
+		../micro_features/yes_micro_features_data.cc
+		../micro_features/yes_micro_features_data.h
+		../micro_features/micro_features_generator.cc
+		../micro_features/micro_features_generator.h
+		../micro_features/no_micro_features_data.cc
+		../micro_features/no_micro_features_data.h
+		../micro_features/tiny_conv_micro_features_model_data.cc
+		../micro_features/tiny_conv_micro_features_model_data.h
+		../micro_features/micro_model_settings.cc
+		../micro_features/micro_model_settings.h
+		../micro_features/no_feature_data_slice.cc
+		../micro_features/no_feature_data_slice.h
+		../micro_features/yes_feature_data_slice.cc
+		../micro_features/yes_feature_data_slice.h
+		../simple_features/simple_features_generator.cc
+		../simple_features/simple_features_generator.h
+		../simple_features/no_power_spectrum_data.cc
+		../simple_features/no_power_spectrum_data.h
+		../simple_features/yes_power_spectrum_data.cc
+		../simple_features/yes_power_spectrum_data.h
+		../simple_features/simple_model_settings.h
+		../../../tools/make/downloads/kissfft/kiss_fft.c
+		../../../tools/make/downloads/kissfft/kiss_fft.h
+		../../../tools/make/downloads/kissfft/tools/kiss_fftr.c
+		../../../tools/make/downloads/kissfft/tools/kiss_fftr.h
+		../../../tools/make/downloads/kissfft/_kiss_fft_guts.h
+		../../../tools/make/downloads/kissfft/COPYING
+		../../../../experimental/microfrontend/lib/fft.cc
+		../../../../experimental/microfrontend/lib/fft_util.cc
+		../../../../experimental/microfrontend/lib/filterbank.c
+		../../../../experimental/microfrontend/lib/filterbank_util.c
+		../../../../experimental/microfrontend/lib/frontend.c
+		../../../../experimental/microfrontend/lib/frontend_util.c
+		../../../../experimental/microfrontend/lib/log_lut.c
+		../../../../experimental/microfrontend/lib/log_scale.c
+		../../../../experimental/microfrontend/lib/log_scale_util.c
+		../../../../experimental/microfrontend/lib/noise_reduction.c
+		../../../../experimental/microfrontend/lib/noise_reduction_util.c
+		../../../../experimental/microfrontend/lib/pcan_gain_control.c
+		../../../../experimental/microfrontend/lib/pcan_gain_control_util.c
+		../../../../experimental/microfrontend/lib/window.c
+		../../../../experimental/microfrontend/lib/window_util.c
+		../../../../experimental/microfrontend/lib/bits.h
+		../../../../experimental/microfrontend/lib/fft.h
+		../../../../experimental/microfrontend/lib/fft_util
+		../../../../experimental/microfrontend/lib/filterbank.h
+		../../../../experimental/microfrontend/lib/filterbank_util.h
+		../../../../experimental/microfrontend/lib/frontend.h
+		../../../../experimental/microfrontend/lib/frontend_util.h
+		../../../../experimental/microfrontend/lib/log_lut.h
+		../../../../experimental/microfrontend/lib/log_scale.h
+		../../../../experimental/microfrontend/lib/log_scale_util.h
+		../../../../experimental/microfrontend/lib/noise_reduction.h
+		../../../../experimental/microfrontend/lib/noise_reduction_util.h
+		../../../../experimental/microfrontend/lib/pcan_gain_control.h
+		../../../../experimental/microfrontend/lib/pcan_gain_control_util.h
+		../../../../experimental/microfrontend/lib/window.h
+		../../../../experimental/microfrontend/lib/window_util.h
                 ${MICRO_SOURCES}
                 ${MICRO_KERNELS_SOURCES}
                 ${MICRO_MEMORY_SOURCES}
@@ -59,10 +115,11 @@ target_sources(app PRIVATE
                 ${TF_MICRO_DIR}/../core/api/tensor_utils.cc
                 ${TF_MICRO_DIR}/../kernels/internal/quantization_util.cc
                 ${TF_MICRO_DIR}/../kernels/kernel_util.cc
-
                 )
 
 target_include_directories(app PRIVATE
+		../../../tools/make/downloads/kissfft
+		${TF_MICRO_DIR}/tools/make/downloads/ruy
                 ${TF_MICRO_DIR}/../../../
                 ${TF_MICRO_DIR}/../micro/tools/make/downloads/gemmlowp
                 ${TF_MICRO_DIR}/../micro/tools/make/downloads/flatbuffers/include
