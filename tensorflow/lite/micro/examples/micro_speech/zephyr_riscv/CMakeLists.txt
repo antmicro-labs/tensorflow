@@ -36,14 +36,6 @@ target_sources(app PRIVATE
 		../recognize_commands.h
 		../micro_features/tiny_conv_micro_features_model_data.cc
 		../micro_features/tiny_conv_micro_features_model_data.h
-
-                #../output_handler.cc
-                #../output_handler.h
-                #../gesture_predictor.cc
-                #../constants.h
-                #../gesture_predictor.h
-                #../magic_wand_model_data.cc
-		#../magic_wand_model_data.h
                 ${MICRO_SOURCES}
                 ${MICRO_KERNELS_SOURCES}
                 ${MICRO_MEMORY_SOURCES}
