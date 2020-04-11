@@ -57,10 +57,6 @@ PERSON_MODEL_MD5 := "fe2934bd0788f1dcc7af3f0a954542ab"
 PERSON_MODEL_INT8_URL := "https://storage.googleapis.com/download.tensorflow.org/data/tf_lite_micro_person_data_int8_grayscale_2020_01_13.zip"
 PERSON_MODEL_INT8_MD5 := "8a7d2c70325f53136faea6dde517b8cc"
 
-# TODO remove Zephyr downloads
-#ZEPHYR_URL := "https://github.com/antmicro/zephyr/archive/55e36b9.zip"
-#ZEPHYR_MD5 := "755622eb4812fde918a6382b65d50c3b"
-
 EMBARC_OSP_URL := "https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_osp/archive/embarc_mli.zip"
 EMBARC_OSP_MD5 := "9eaf7b3a1ed05872a03da9796672a776"
 

@@ -22,7 +22,6 @@ list(REMOVE_ITEM MICRO_MEMORY_SOURCES ${MICRO_TESTS_MEMORY_SOURCES})
 target_compile_options(app PRIVATE "-fno-threadsafe-statics")
 
 target_sources(app PRIVATE
-                src/assert.cc
                 ../command_responder.cc
 		../command_responder.h
 		../audio_provider.cc
