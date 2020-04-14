@@ -26,7 +26,6 @@ add_subdirectory(cmake_sub/microfrontend)
 
 target_sources(
 	app PRIVATE
-        src/assert.cc
         ${MICRO_SOURCES}
         ${MICRO_KERNELS_SOURCES}
         ${MICRO_MEMORY_SOURCES}
