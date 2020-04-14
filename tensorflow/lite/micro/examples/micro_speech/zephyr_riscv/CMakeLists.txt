@@ -26,6 +26,8 @@ add_subdirectory(cmake_sub/microfrontend)
 
 target_sources(
 	app PRIVATE
+        src/audio_provider.cc
+        src/audio_provider.h
         ${MICRO_SOURCES}
         ${MICRO_KERNELS_SOURCES}
         ${MICRO_MEMORY_SOURCES}
