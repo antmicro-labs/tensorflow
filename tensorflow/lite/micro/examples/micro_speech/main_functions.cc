@@ -13,9 +13,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
 #include "tensorflow/lite/micro/examples/micro_speech/main_functions.h"
-#include "tensorflow/lite/micro/examples/micro_speech/feature_provider.h"
+
 #include "tensorflow/lite/micro/examples/micro_speech/audio_provider.h"
 #include "tensorflow/lite/micro/examples/micro_speech/command_responder.h"
+#include "tensorflow/lite/micro/examples/micro_speech/feature_provider.h"
 #include "tensorflow/lite/micro/examples/micro_speech/micro_features/micro_model_settings.h"
 #include "tensorflow/lite/micro/examples/micro_speech/micro_features/tiny_conv_micro_features_model_data.h"
 #include "tensorflow/lite/micro/examples/micro_speech/recognize_commands.h"
