@@ -17,7 +17,6 @@ list(REMOVE_ITEM MICRO_SOURCES ${MICRO_TESTS_SOURCES})
 list(REMOVE_ITEM MICRO_KERNELS_SOURCES ${MICRO_TESTS_KERNELS_SOURCES})
 list(REMOVE_ITEM MICRO_MEMORY_SOURCES ${MICRO_TESTS_MEMORY_SOURCES})
 
-# YOU CAN FIND SUBDIRECTORIES IN cmake_sub/ directory
 add_subdirectory(src)
 add_subdirectory(cmake_sub/simple_features)
 add_subdirectory(cmake_sub/micro_features)
@@ -27,8 +26,6 @@ add_subdirectory(cmake_sub/microfrontend)
 
 target_sources (
 	app PRIVATE
-        src/audio_provider.cc
-        src/audio_provider.h
         ${MICRO_SOURCES}
         ${MICRO_KERNELS_SOURCES}
         ${MICRO_MEMORY_SOURCES}
@@ -46,7 +43,7 @@ target_sources (
 
 target_link_libraries(
 	app PRIVATE
-	src
+	zephyr_src
 	micro_features
 	simple_features
 	micro_speech
