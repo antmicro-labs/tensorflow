@@ -57,7 +57,7 @@ target_sources (
 	src/audio_provider.h
         src/command_responder.cc
 	src/command_responder.h
-        #src/main.cc
+        src/main.cpp
         #src/debug_log.cc
         src/assert.cc
         
@@ -68,7 +68,7 @@ target_sources (
 	#${MICRO_SPEECH}/audio_provider.h
 	${MICRO_SPEECH}/feature_provider.cc
 	${MICRO_SPEECH}/feature_provider.h
-	${MICRO_SPEECH}/main.cc
+	#${MICRO_SPEECH}/main.cc
         ${MICRO_SPEECH}/main_functions.cc
 	${MICRO_SPEECH}/main_functions.h
 	${MICRO_SPEECH}/recognize_commands.cc
@@ -170,5 +170,7 @@ target_include_directories(
         ${KISS_FFT}
         )
 
-add_compile_options(-DNDEBUG -DTF_LITE_STATIC_MEMORY)
+add_compile_options(
+#-DNDEBUG 
+-DTF_LITE_STATIC_MEMORY)
 
