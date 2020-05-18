@@ -43,19 +43,15 @@ target_sources(
           ${TF_LITE_DIR}/core/api/op_resolver.cc
           ${TF_LITE_DIR}/core/api/tensor_utils.cc
           ${TF_LITE_DIR}/kernels/internal/quantization_util.cc
-		  ${TF_LITE_DIR}/kernels/kernel_util.cc
-		  
+          ${TF_LITE_DIR}/kernels/kernel_util.cc
           # zephyr-src
           src/audio_provider.cc
           src/audio_provider.h
           src/command_responder.cc
-		  src/command_responder.h
-		  
-		  # micro_speech 
-		  # ${MICRO_SPEECH}/command_responder.cc
+          src/command_responder.h
+          # micro_speech ${MICRO_SPEECH}/command_responder.cc
           # ${MICRO_SPEECH}/command_responder.h
-		  # ${MICRO_SPEECH}/audio_provider.cc
-		  # ${MICRO_SPEECH}/audio_provider.h
+          # ${MICRO_SPEECH}/audio_provider.cc ${MICRO_SPEECH}/audio_provider.h
           ${MICRO_SPEECH}/feature_provider.cc
           ${MICRO_SPEECH}/feature_provider.h
           ${MICRO_SPEECH}/main.cc
@@ -70,9 +66,7 @@ target_sources(
           # ${MICRO_SPEECH}/no_30ms_sample_data.cc
           # ${MICRO_SPEECH}/no_30ms_sample_data.h
           # ${MICRO_SPEECH}/yes_30ms_sample_data.cc
-		  # ${MICRO_SPEECH}/yes_30ms_sample_data.h
-		  
-          # micro_features
+          # ${MICRO_SPEECH}/yes_30ms_sample_data.h micro_features
           ${MICRO_FEATURES}/tiny_conv_micro_features_model_data.cc
           ${MICRO_FEATURES}/tiny_conv_micro_features_model_data.h
           ${MICRO_FEATURES}/micro_model_settings.cc
@@ -86,15 +80,12 @@ target_sources(
           # ${MICRO_FEATURES}/no_feature_data_slice.cc
           # ${MICRO_FEATURES}/no_feature_data_slice.h
           # ${MICRO_FEATURES}/yes_feature_data_slice.cc
-		  # ${MICRO_FEATURES}/yes_feature_data_slice.h
-		  
-          # kiss_fft
+          # ${MICRO_FEATURES}/yes_feature_data_slice.h kiss_fft
           ${KISS_FFT}/kiss_fft.c
           ${KISS_FFT}/kiss_fft.h
           ${KISS_FFT}/_kiss_fft_guts.h
           ${KISS_FFT}/tools/kiss_fftr.c
-		  ${KISS_FFT}/tools/kiss_fftr.h
-		  
+          ${KISS_FFT}/tools/kiss_fftr.h
           # microfrontend
           ${MICROFRONTEND}/fft.cc
           ${MICROFRONTEND}/fft_util.cc
@@ -126,24 +117,20 @@ target_sources(
           ${MICROFRONTEND}/pcan_gain_control.h
           ${MICROFRONTEND}/pcan_gain_control_util.h
           ${MICROFRONTEND}/window.h
-		  ${MICROFRONTEND}/window_util.h
-		  
-		  # simple_features
-		  # ${SIMPLE_FEATURES}/simple_features_generator.cc
-          # ${SIMPLE_FEATURES}/simple_features_generator.h
-          # ${SIMPLE_FEATURES}/simple_model_settings.h
-  		  # ${SIMPLE_FEATURES}/no_power_spectrum_data.cc
-  		  # ${SIMPLE_FEATURES}/no_power_spectrum_data.h
-  		  # ${SIMPLE_FEATURES}/yes_power_spectrum_data.cc
-  		  # ${SIMPLE_FEATURES}/yes_power_spectrum_data.h
+          ${MICROFRONTEND}/window_util.h
+  # simple_features ${SIMPLE_FEATURES}/simple_features_generator.cc
+  # ${SIMPLE_FEATURES}/simple_features_generator.h
+  # ${SIMPLE_FEATURES}/simple_model_settings.h
+  # ${SIMPLE_FEATURES}/no_power_spectrum_data.cc
+  # ${SIMPLE_FEATURES}/no_power_spectrum_data.h
+  # ${SIMPLE_FEATURES}/yes_power_spectrum_data.cc
+  # ${SIMPLE_FEATURES}/yes_power_spectrum_data.h
 )
 
 target_include_directories(
   app
-  PRIVATE ${TF_DIR}
-          ${TF_MICRO_DIR}/tools/make/downloads/ruy
+  PRIVATE ${TF_DIR} ${TF_MICRO_DIR}/tools/make/downloads/ruy
           ${TF_LITE_DIR}/micro/tools/make/downloads/gemmlowp
-          ${TF_MICRO_DIR}/tools/make/downloads/flatbuffers/include
-          ${KISS_FFT})
+          ${TF_MICRO_DIR}/tools/make/downloads/flatbuffers/include ${KISS_FFT})
 
 add_compile_options(-DNDEBUG -DTF_LITE_STATIC_MEMORY)
