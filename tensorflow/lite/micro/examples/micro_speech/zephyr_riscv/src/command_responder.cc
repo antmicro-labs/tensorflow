@@ -14,45 +14,33 @@ limitations under the License.
 ==============================================================================*/
 
 #include "tensorflow/lite/micro/examples/micro_speech/command_responder.h"
-#include <zephyr.h>
-#include <device.h>
-#include <drivers/gpio.h>
 
-#define LED_PORT0	DT_ALIAS_LED0_GPIOS_CONTROLLER
-#define LED_PORT1	DT_ALIAS_LED1_GPIOS_CONTROLLER
-#define LED_PORT2	DT_ALIAS_LED2_GPIOS_CONTROLLER
-#define LED0		DT_ALIAS_LED0_GPIOS_PIN
-#define LED1		DT_ALIAS_LED1_GPIOS_PIN
-#define LED2		DT_ALIAS_LED2_GPIOS_PIN
-
-// The default implementation writes out the name of the recognized command
-// to the error console. The extended implementation turns on LEDs coresponding to commands
 void RespondToCommand(tflite::ErrorReporter* error_reporter,
                       int32_t current_time, const char* found_command,
                       uint8_t score, bool is_new_command) {
 
-  struct device *dev0, *dev1, *dev2;
-
-  dev0 = device_get_binding(LED_PORT0);
-  dev1 = device_get_binding(LED_PORT1);
-  dev2 = device_get_binding(LED_PORT2);
-  /* Set LED pins as output */
-  gpio_pin_configure(dev0, LED0, GPIO_DIR_OUT);
-  gpio_pin_configure(dev1, LED1, GPIO_DIR_OUT);
-  gpio_pin_configure(dev2, LED2, GPIO_DIR_OUT);
+  volatile unsigned int * ledr = (unsigned int *) 0x82005800;
+  volatile unsigned int * ledg = (unsigned int *) 0x82006000;
+  volatile unsigned int * ledb = (unsigned int *) 0x82006800;
 
   if (is_new_command) {
     error_reporter->Report("Heard %s (%d) @%dms", found_command, score,
                            current_time);
 
     if (found_command[0] == 'y') {
-      gpio_pin_write(dev0, LED0, 1);
+	    *ledr = 1;
+	    *ledg = 0;
+	    *ledb = 0;
     }
     if (found_command[0] == 'n') {
-      gpio_pin_write(dev1, LED1, 1);
+	    *ledr = 0;
+	    *ledg = 1;
+	    *ledb = 0;
     }
     if (found_command[0] == 'u') {
-      gpio_pin_write(dev2, LED2, 1);
+	    *ledr = 0;
+	    *ledg = 0;
+	    *ledb = 1;
     }
   }
 }
