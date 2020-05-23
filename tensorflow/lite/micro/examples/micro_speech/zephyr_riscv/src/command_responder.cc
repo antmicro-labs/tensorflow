@@ -15,32 +15,42 @@ limitations under the License.
 
 #include "tensorflow/lite/micro/examples/micro_speech/command_responder.h"
 
+#include "assistant_services.h"
+
+// Globals
+static AssistantServices assistantServices;
+
+
 void RespondToCommand(tflite::ErrorReporter* error_reporter,
                       int32_t current_time, const char* found_command,
                       uint8_t score, bool is_new_command) {
+  
 
-  volatile unsigned int * ledr = (unsigned int *) 0x82005800;
-  volatile unsigned int * ledg = (unsigned int *) 0x82006000;
-  volatile unsigned int * ledb = (unsigned int *) 0x82006800;
+  volatile unsigned int* ledr = (unsigned int*)0x82005800;
+  volatile unsigned int* ledg = (unsigned int*)0x82006000;
+  volatile unsigned int* ledb = (unsigned int*)0x82006800;
 
   if (is_new_command) {
     error_reporter->Report("Heard %s (%d) @%dms", found_command, score,
                            current_time);
-
+    VoiceCommand command;
     if (found_command[0] == 'y') {
-	    *ledr = 1;
-	    *ledg = 0;
-	    *ledb = 0;
+      *ledr = 1;
+      *ledg = 0;
+      *ledb = 0;
+      command = VoiceCommand::Yes;
     }
     if (found_command[0] == 'n') {
-	    *ledr = 0;
-	    *ledg = 1;
-	    *ledb = 0;
+      *ledr = 0;
+      *ledg = 1;
+      *ledb = 0;
+      command = VoiceCommand::No;
     }
     if (found_command[0] == 'u') {
-	    *ledr = 0;
-	    *ledg = 0;
-	    *ledb = 1;
+      *ledr = 0;
+      *ledg = 0;
+      *ledb = 1;
     }
+    assistantServices.interpretVoiceCommand(command);
   }
 }
