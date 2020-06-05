@@ -30,9 +30,7 @@ void AssistantServices::interpretVoiceCommand(VoiceCommand command) {
   if (currentActionID == ID_SHOW_CURRENT_TIME && command == VoiceCommand::Go) {
     showCurrentTime();
   } else if (currentActionID == ID_GET_WEATHER_STATUS &&
-             command ==
-                 VoiceCommand::Yes) {  // temp Yes to see an effect in the UART
-                                       // -> should be VoiceCommand:Go
+             command == VoiceCommand::Go) {
     getWeatherStatus();
   } else if (currentActionID == ID_SET_LIGHT) {
     if (command == VoiceCommand::On) {

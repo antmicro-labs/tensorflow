@@ -16,40 +16,65 @@ limitations under the License.
 #include "tensorflow/lite/micro/examples/micro_speech/command_responder.h"
 
 #include "assistant_services.h"
+#include "string.h"
 
 // Globals
 static AssistantServices assistantServices;
+namespace {
+  volatile unsigned int* const led_r_address = (unsigned int*)0x82005800;
+  volatile unsigned int* const led_g_address = (unsigned int*)0x82006000;
+  volatile unsigned int* const led_b_address = (unsigned int*)0x82006800;
+}  // namespace
 
+static void setLeds(unsigned int led_r, unsigned int led_g, unsigned int led_b) {
+  *led_r_address = led_r;
+  *led_g_address = led_g;
+  *led_b_address = led_b;
+}
 
 void RespondToCommand(tflite::ErrorReporter* error_reporter,
                       int32_t current_time, const char* found_command,
                       uint8_t score, bool is_new_command) {
-  
-
-  volatile unsigned int* ledr = (unsigned int*)0x82005800;
-  volatile unsigned int* ledg = (unsigned int*)0x82006000;
-  volatile unsigned int* ledb = (unsigned int*)0x82006800;
-
   if (is_new_command) {
     error_reporter->Report("Heard %s (%d) @%dms", found_command, score,
                            current_time);
     VoiceCommand command;
-    if (found_command[0] == 'y') {
-      *ledr = 1;
-      *ledg = 0;
-      *ledb = 0;
+    if (strcmp("yes", found_command) == 0) {
+      setLeds(0, 0, 1);
       command = VoiceCommand::Yes;
-    }
-    if (found_command[0] == 'n') {
-      *ledr = 0;
-      *ledg = 1;
-      *ledb = 0;
+    } else if (strcmp("no", found_command) == 0) {
+      setLeds(0, 1, 0);
       command = VoiceCommand::No;
-    }
-    if (found_command[0] == 'u') {
-      *ledr = 0;
-      *ledg = 0;
-      *ledb = 1;
+    } else if (strcmp("up", found_command) == 0) {
+      setLeds(0, 0, 0);
+      command = VoiceCommand::Up;
+    } else if (strcmp("down", found_command) == 0) {
+      setLeds(0, 0, 0);
+      command = VoiceCommand::Down;
+    } else if (strcmp("left", found_command) == 0) {
+      setLeds(0, 1, 1);
+      command = VoiceCommand::Left;
+    } else if (strcmp("right", found_command) == 0) {
+      setLeds(1, 0, 0);
+      command = VoiceCommand::Right;
+    } else if (strcmp("on", found_command) == 0) {
+      setLeds(1, 0, 1);
+      command = VoiceCommand::On;
+    } else if (strcmp("off", found_command) == 0) {
+      setLeds(1, 1, 0);
+      command = VoiceCommand::Off;
+    } else if (strcmp("stop", found_command) == 0) {
+      setLeds(0, 0, 0);
+      command = VoiceCommand::Stop;
+    } else if (strcmp("go", found_command) == 0) {
+      setLeds(1, 1, 1);
+      command = VoiceCommand::Go;
+    } else if (strcmp("unknown", found_command) == 0) {
+      setLeds(0, 0, 0);
+      command = VoiceCommand::Unknown;
+    } else {
+      setLeds(0, 0, 0);
+      command = VoiceCommand::Silence;
     }
     assistantServices.interpretVoiceCommand(command);
   }

@@ -11,7 +11,9 @@ enum class VoiceCommand {
   On,
   Off,
   Stop,
-  Go
+  Go,
+  Unknown,
+  Silence
 };
 
 enum class LightState {
