@@ -47,6 +47,8 @@ target_sources(
           # zephyr-src
           src/audio_provider.cc
           src/audio_provider.h
+          src/assistant_services.cc
+          src/assistant_services.h
           src/command_responder.cc
           src/command_responder.h
           # micro_speech ${MICRO_SPEECH}/command_responder.cc
