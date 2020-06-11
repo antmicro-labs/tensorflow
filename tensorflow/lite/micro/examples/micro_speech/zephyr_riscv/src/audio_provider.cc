@@ -148,5 +148,6 @@ TfLiteStatus GetAudioSamples(tflite::ErrorReporter *error_reporter,
     return kTfLiteOk;
 }
 
-int32_t LatestAudioTimestamp() {g_latest_audio_timestamp += 100;
-  return g_latest_audio_timestamp;}
+int32_t LatestAudioTimestamp() {
+  return g_latest_audio_timestamp;
+}
