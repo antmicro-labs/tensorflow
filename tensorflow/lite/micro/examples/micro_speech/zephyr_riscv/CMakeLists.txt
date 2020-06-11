@@ -46,21 +46,21 @@ target_sources(
           ${TF_LITE_DIR}/kernels/kernel_util.cc
           # zephyr-src
           src/audio_provider.cc
-          src/audio_provider.h
           src/assistant_services.cc
           src/assistant_services.h
           src/command_responder.cc
-          src/command_responder.h
+          src/recognize_commands.h
           # micro_speech ${MICRO_SPEECH}/command_responder.cc
-          # ${MICRO_SPEECH}/command_responder.h
-          # ${MICRO_SPEECH}/audio_provider.cc ${MICRO_SPEECH}/audio_provider.h
+          ${MICRO_SPEECH}/command_responder.h
+          # ${MICRO_SPEECH}/audio_provider.cc
+          ${MICRO_SPEECH}/audio_provider.h
           ${MICRO_SPEECH}/feature_provider.cc
           ${MICRO_SPEECH}/feature_provider.h
           ${MICRO_SPEECH}/main.cc
           ${MICRO_SPEECH}/main_functions.cc
           ${MICRO_SPEECH}/main_functions.h
           ${MICRO_SPEECH}/recognize_commands.cc
-          ${MICRO_SPEECH}/recognize_commands.h
+          # ${MICRO_SPEECH}/recognize_commands.h
           ${MICRO_SPEECH}/no_1000ms_sample_data.cc
           ${MICRO_SPEECH}/no_1000ms_sample_data.h
           ${MICRO_SPEECH}/yes_1000ms_sample_data.cc
