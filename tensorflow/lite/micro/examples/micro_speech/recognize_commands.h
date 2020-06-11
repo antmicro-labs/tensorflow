@@ -59,8 +59,7 @@ class PreviousResultsQueue {
 
   void push_back(const Result& entry) {
     if (size() >= kMaxResults) {
-      TF_LITE_REPORT_ERROR(
-          error_reporter_,
+      error_reporter_->Report(
           "Couldn't push_back latest result, too many already!");
       return;
     }
@@ -70,8 +69,7 @@ class PreviousResultsQueue {
 
   Result pop_front() {
     if (size() <= 0) {
-      TF_LITE_REPORT_ERROR(error_reporter_,
-                           "Couldn't pop_front result, none present!");
+      error_reporter_->Report("Couldn't pop_front result, none present!");
       return Result();
     }
     Result result = front();
@@ -88,8 +86,7 @@ class PreviousResultsQueue {
   // queue.
   Result& from_front(int offset) {
     if ((offset < 0) || (offset >= size_)) {
-      TF_LITE_REPORT_ERROR(error_reporter_,
-                           "Attempt to read beyond the end of the queue!");
+      error_reporter_->Report("Attempt to read beyond the end of the queue!");
       offset = size_ - 1;
     }
     int index = front_index_ + offset;
@@ -131,9 +128,9 @@ class RecognizeCommands {
   // further recognitions for a set time after one has been triggered, which can
   // help reduce spurious recognitions.
   explicit RecognizeCommands(tflite::ErrorReporter* error_reporter,
-                             int32_t average_window_duration_ms = 1000,
-                             uint8_t detection_threshold = 200,
-                             int32_t suppression_ms = 1500,
+                             int32_t average_window_duration_ms = 3000,
+                             uint8_t detection_threshold = 150,
+                             int32_t suppression_ms = 10,
                              int32_t minimum_count = 3);
 
   // Call this with the results of running a model on sample data.
