@@ -36,8 +36,6 @@ void RespondToCommand(tflite::ErrorReporter* error_reporter,
                       int32_t current_time, const char* found_command,
                       uint8_t score, bool is_new_command) {
   if (is_new_command) {
-    error_reporter->Report("Heard %s (%d) @%dms", found_command, score,
-                           current_time);
     VoiceCommand command;
     if (strcmp("yes", found_command) == 0) {
       setLeds(0, 0, 1);
@@ -76,6 +74,6 @@ void RespondToCommand(tflite::ErrorReporter* error_reporter,
       setLeds(0, 0, 0);
       command = VoiceCommand::Silence;
     }
-    assistantServices.interpretVoiceCommand(command);
+    assistantServices.sendOverUART(command);
   }
 }

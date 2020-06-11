@@ -6,7 +6,50 @@
 AssistantServices::AssistantServices()
     : currentActionID(ID_GET_WEATHER_STATUS),
       currentLightState(LightState::Off) {
-  printCurrentMenuState();
+}
+
+void AssistantServices::sendOverUART(VoiceCommand command) const {
+  switch (command) {
+    case VoiceCommand::Yes:
+      printk("\nVA:CMD:YES\n");
+      break;
+    case VoiceCommand::No:
+      printk("\nVA:CMD:NO\n");
+      break;
+    case VoiceCommand::Up:
+      printk("\nVA:CMD:UP\n");
+      break;
+    case VoiceCommand::Down:
+      printk("\nVA:CMD:DOWN\n");
+      break;
+    case VoiceCommand::Left:
+      printk("\nVA:CMD:LEFT\n");
+      break;
+    case VoiceCommand::Right:
+      printk("\nVA:CMD:RIGHT\n");
+      break;
+    case VoiceCommand::On:
+      printk("\nVA:CMD:ON\n");
+      break;
+    case VoiceCommand::Off:
+      printk("\nVA:CMD:OFF\n");
+      break;
+    case VoiceCommand::Stop:
+      printk("\nVA:CMD:STOP\n");
+      break;
+    case VoiceCommand::Go:
+      printk("\nVA:CMD:GO\n");
+      break;
+    case VoiceCommand::Unknown:
+      printk("\nVA:CMD:UNKNOWN\n");
+      break;
+    case VoiceCommand::Silence:
+      printk("\nVA:IDLE\n");
+      break;
+    default:
+      printk("VA:ERROR:ACTION_NOT_IMPLEMENTED\n");
+      break;
+  }
 }
 
 void AssistantServices::interpretVoiceCommand(VoiceCommand command) {

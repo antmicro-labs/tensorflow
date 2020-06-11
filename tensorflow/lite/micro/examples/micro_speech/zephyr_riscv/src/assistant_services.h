@@ -25,6 +25,7 @@ class AssistantServices {
  public:
   AssistantServices();
   void interpretVoiceCommand(VoiceCommand command);
+  void sendOverUART(VoiceCommand command) const;
 
  private:
   const static int N_ACTIONS = 3;
